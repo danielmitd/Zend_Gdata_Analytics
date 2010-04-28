@@ -1,9 +1,18 @@
 <?php
 class Zend_Gdata_Analytics_DataEntry extends Zend_Gdata_Entry {
 
+	/**
+	 * @var array
+	 */
 	protected $_dimensions = array();
+	/**
+	 * @var array
+	 */
 	protected $_metrics = array();
 
+	/**
+	 * @param DOMElement $element
+	 */
     public function __construct($element = null)
     {
         $this->registerAllNamespaces(Zend_Gdata_Analytics::$namespaces);
@@ -12,6 +21,7 @@ class Zend_Gdata_Analytics_DataEntry extends Zend_Gdata_Entry {
 
 	/**
      * @param DOMElement $child
+     * @return void
      */
     protected function takeChildFromDOM($child)
     {
@@ -20,12 +30,13 @@ class Zend_Gdata_Analytics_DataEntry extends Zend_Gdata_Entry {
         	case $this->lookupNamespace('ga') . ':' . 'dimension';
 	            $dimension = new Zend_Gdata_Analytics_Extension_Dimension();
 	            $dimension->transferFromDOM($child);
-	            $this->_dimensions[$dimension->getName()] = $dimension;
+	            var_dump($dimension);
+	            $this->_dimensions[] = $dimension;
             break;
         	case $this->lookupNamespace('ga') . ':' . 'metric';
 	            $metric = new Zend_Gdata_Analytics_Extension_Metric();
 	            $metric->transferFromDOM($child);
-	            $this->_metrics[$metric->getName()] = $metric;
+	            $this->_metrics[] = $metric;
             break;
         	default:
             	parent::takeChildFromDOM($child);
@@ -34,23 +45,40 @@ class Zend_Gdata_Analytics_DataEntry extends Zend_Gdata_Entry {
     }
 
 	/**
-	 * @return string
+	 * @param string $name 
+	 * @return mixed
 	 */
-	public function getDimension($dimension){
-		return $this->_dimensions[$dimension];
-	}
-	/**
-	 * @return string
-	 */
-	public function getMetric($metric){
-		return $this->_metrics[$metric];
+	public function getDimension($name){
+		foreach ($this->_dimensions as $dimension){
+			if($dimension->getName() == $name){
+				return $dimension;
+			}
+		}
+		return null;
 	}
 	
-	public function getValue($name){
-		if(array_key_exists($name, $this->_metrics)){
-			return $this->_metrics[$name];
+	/** 
+	 * @param string $name 
+	 * @return mixed
+	 */
+	public function getMetric($name){
+		foreach ($this->_metrics as $metric){
+			if($metric->getName() == $name){
+				return $metric;
+			}
 		}
-		return $this->_dimensions[$name];
+		return null;
+	}
+	
+	/**
+	 * @param string $name 
+	 * @return mixed
+	 */
+	public function getValue($name){
+		if(null !== ($metric = $this->getMetric($name))){
+			return $metric;
+		}
+		return $this->getDimension($name);
 	}
 }
 ?>

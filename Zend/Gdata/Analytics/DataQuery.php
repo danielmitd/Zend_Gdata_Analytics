@@ -257,7 +257,7 @@ class Zend_Gdata_Analytics_DataQuery extends Zend_Gdata_Query {
 	 * @return Zend_Gdata_Analytics_DataQuery
 	 */
 	public function setFilter($value){
-		$this->setParam("filter", $value);
+		$this->setParam("filters", $value);
 		return $this;
 	}
 	/**
