@@ -30,7 +30,6 @@ class Zend_Gdata_Analytics_DataEntry extends Zend_Gdata_Entry {
         	case $this->lookupNamespace('ga') . ':' . 'dimension';
 	            $dimension = new Zend_Gdata_Analytics_Extension_Dimension();
 	            $dimension->transferFromDOM($child);
-	            var_dump($dimension);
 	            $this->_dimensions[] = $dimension;
             break;
         	case $this->lookupNamespace('ga') . ':' . 'metric';
