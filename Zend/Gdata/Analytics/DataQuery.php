@@ -171,6 +171,10 @@ class Zend_Gdata_Analytics_DataQuery extends Zend_Gdata_Query {
 	 * @var array
 	 */
 	protected $_metrics = array();
+	/**
+	 * @var array
+	 */
+	protected $_sort = array();
 	
 	/**
 	 * @param string $id
@@ -262,10 +266,31 @@ class Zend_Gdata_Analytics_DataQuery extends Zend_Gdata_Query {
 	}
 	/**
 	 * @param string $sort
+	 * @param boolean[optional] $descending
+	 * @return Zend_Gdata_Analytics_DataQuery
+	 */
+	public function addSort($sort, $descending=false){
+		// add to sort storage
+		$this->_sort[] = ($descending?'-':'').$sort;		
+		$this->setParam('sort', implode(",", $this->_sort));
+		return $this;
+	}
+	
+	/**
+	 * @deprecated
+	 * @param string $sort
+	 * @param boolean[optional] $descending
 	 * @return Zend_Gdata_Analytics_DataQuery
 	 */
 	public function setSort($sort, $descending=false){
-		$this->setParam('sort', ($descending?'-':'').$sort);
+		return $this->addSort($sort, $descending);
+	}
+	
+	/**
+	 * @return Zend_Gdata_Analytics_DataQuery
+	 */
+	public function clearSort(){
+		$this->_sort = array();
 		return $this;
 	}
 
