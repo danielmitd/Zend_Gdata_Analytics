@@ -371,7 +371,7 @@ class Zend_Gdata_Analytics_DataQuery extends Zend_Gdata_Query {
 			$filters.=($filter[1]===true?';':',').$filter[0];
 		}
 		
-		if($filter!=""){
+		if($filters!=""){
 			$this->setParam('filters', ltrim($filters, ",;"));
 		}
 		
