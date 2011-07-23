@@ -21,3 +21,5 @@ An additonal Zend_GData component to query data from Analytics.
     foreach($result as $row){
       /** … **/
     }
+    
+More on the [blog](http://healthycod.in/2011/07/google-analytics-and-zend-framework).
