@@ -38,8 +38,8 @@ class Zend_Gdata_Analytics extends Zend_Gdata
 {
 
 	const AUTH_SERVICE_NAME = 'analytics';
-	const ANALYTICS_FEED_URI = 'http://www.google.com/analytics/feeds';
-	const ANALYTICS_ACCOUNT_FEED_URI = 'http://www.google.com/analytics/feeds/accounts';
+	const ANALYTICS_FEED_URI = 'https://www.google.com/analytics/feeds';
+	const ANALYTICS_ACCOUNT_FEED_URI = 'https://www.google.com/analytics/feeds/accounts';
 
 	public static $namespaces = array(
         array('ga', 'http://schemas.google.com/analytics/2009', 1, 0)
