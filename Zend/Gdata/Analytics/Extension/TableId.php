@@ -6,13 +6,9 @@
 require_once 'Zend/Gdata/Extension.php';
 
 /**
- * Represents the gCal:timezone element used by the Calendar data API
- *
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Analytics
- * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Gdata_Analytics_Extension_TableId extends Zend_Gdata_Extension
 {
@@ -94,4 +90,3 @@ class Zend_Gdata_Analytics_Extension_TableId extends Zend_Gdata_Extension
         return $this->getValue();
     }
 }
-?>

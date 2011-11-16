@@ -1,11 +1,14 @@
 <?php
+/**
+ * @see Zend_Gdata_Query
+ */
 require_once 'Zend/Gdata/Query.php';
 
 /**
- * 
- * @author daniel hartmann
  * @todo Valid combinations of dimensions and metrics (http://code.google.com/intl/de-CH/apis/analytics/docs/gdata/gdataReferenceValidCombos.html)
- *
+ * @category   Zend
+ * @package    Zend_Gdata
+ * @subpackage Analytics
  */
 class Zend_Gdata_Analytics_DataQuery extends Zend_Gdata_Query {
 
@@ -196,7 +199,8 @@ class Zend_Gdata_Analytics_DataQuery extends Zend_Gdata_Query {
 	 * @param string $id
 	 * @return Zend_Gdata_Analytics_DataQuery
 	 */
-	public function setProfileId($id){
+	public function setProfileId($id)
+	{
 		$this->_profileId = $id;
 		return $this;
 	}
@@ -204,7 +208,8 @@ class Zend_Gdata_Analytics_DataQuery extends Zend_Gdata_Query {
 	/**
 	 * @return string
 	 */
-	public function getProfileId(){
+	public function getProfileId()
+	{
 		return $this->_profileId;
 	}
 
@@ -212,7 +217,8 @@ class Zend_Gdata_Analytics_DataQuery extends Zend_Gdata_Query {
 	 * @param string $dimension
 	 * @return Zend_Gdata_Analytics_DataQuery
 	 */
-	public function addDimension($dimension){
+	public function addDimension($dimension)
+	{
 		$this->_dimensions[$dimension] = true;		
 		return $this;
 	}
@@ -221,7 +227,8 @@ class Zend_Gdata_Analytics_DataQuery extends Zend_Gdata_Query {
 	 * @param string $metric
 	 * @return Zend_Gdata_Analytics_DataQuery
 	 */
-	public function addMetric($metric){
+	public function addMetric($metric)
+	{
 		$this->_metrics[$metric] = true;
 		return $this;
 	}
@@ -229,14 +236,16 @@ class Zend_Gdata_Analytics_DataQuery extends Zend_Gdata_Query {
 	/**
 	 * @return array
 	 */
-	public function getDimensions(){
+	public function getDimensions()
+	{
 		return $this->_dimensions;
 	}
 
 	/**
 	 * @return array
 	 */
-	public function getMetrics(){
+	public function getMetrics()
+	{
 		return $this->_metrics;
 	}
 
@@ -244,7 +253,8 @@ class Zend_Gdata_Analytics_DataQuery extends Zend_Gdata_Query {
 	 * @param string $dimension
 	 * @return Zend_Gdata_Analytics_DataQuery
 	 */
-	public function removeDimension($dimension){
+	public function removeDimension($dimension)
+	{
 		unset($this->_dimensions[$dimension]);
 		return $this;
 	}
@@ -252,7 +262,8 @@ class Zend_Gdata_Analytics_DataQuery extends Zend_Gdata_Query {
 	 * @param string $metric
 	 * @return Zend_Gdata_Analytics_DataQuery
 	 */
-	public function removeMetric($metric){
+	public function removeMetric($metric)
+	{
 		unset($this->_metrics[$metric]);
 		return $this;
 	}
@@ -260,7 +271,8 @@ class Zend_Gdata_Analytics_DataQuery extends Zend_Gdata_Query {
 	 * @param string $value
 	 * @return Zend_Gdata_Analytics_DataQuery
 	 */
-	public function setStartDate($date){
+	public function setStartDate($date)
+	{
 		$this->setParam("start-date", $date);
 		return $this;
 	}
@@ -268,7 +280,8 @@ class Zend_Gdata_Analytics_DataQuery extends Zend_Gdata_Query {
 	 * @param string $value
 	 * @return Zend_Gdata_Analytics_DataQuery
 	 */
-	public function setEndDate($date){
+	public function setEndDate($date)
+	{
 		$this->setParam("end-date", $date);
 		return $this;
 	}
@@ -277,7 +290,8 @@ class Zend_Gdata_Analytics_DataQuery extends Zend_Gdata_Query {
 	 * @param string $filter
 	 * @return Zend_Gdata_Analytics_DataQuery
 	 */
-	public function addFilter($filter){
+	public function addFilter($filter)
+	{
 		$this->_filters[] = array($filter, true);
 		return $this;
 	}
@@ -286,7 +300,8 @@ class Zend_Gdata_Analytics_DataQuery extends Zend_Gdata_Query {
 	 * @param string $filter
 	 * @return Zend_Gdata_Analytics_DataQuery
 	 */
-	public function addOrFilter($filter){
+	public function addOrFilter($filter)
+	{
 		$this->_filters[] = array($filter, false);
 		return $this;
 	}
@@ -296,7 +311,8 @@ class Zend_Gdata_Analytics_DataQuery extends Zend_Gdata_Query {
 	 * @param string $value
 	 * @return Zend_Gdata_Analytics_DataQuery
 	 */
-	public function setFilter($value){
+	public function setFilter($value)
+	{
 		return $this->addFilter($value);
 	}
 	/**
@@ -304,7 +320,8 @@ class Zend_Gdata_Analytics_DataQuery extends Zend_Gdata_Query {
 	 * @param boolean[optional] $descending
 	 * @return Zend_Gdata_Analytics_DataQuery
 	 */
-	public function addSort($sort, $descending=false){
+	public function addSort($sort, $descending=false)
+	{
 		// add to sort storage
 		$this->_sort[] = ($descending?'-':'').$sort;
 		return $this;
@@ -316,14 +333,16 @@ class Zend_Gdata_Analytics_DataQuery extends Zend_Gdata_Query {
 	 * @param boolean[optional] $descending
 	 * @return Zend_Gdata_Analytics_DataQuery
 	 */
-	public function setSort($sort, $descending=false){
+	public function setSort($sort, $descending=false)
+	{
 		return $this->addSort($sort, $descending);
 	}
 	
 	/**
 	 * @return Zend_Gdata_Analytics_DataQuery
 	 */
-	public function clearSort(){
+	public function clearSort()
+	{
 		$this->_sort = array();
 		return $this;
 	}
@@ -332,7 +351,8 @@ class Zend_Gdata_Analytics_DataQuery extends Zend_Gdata_Query {
      * @param string $segment
      * @return Zend_Gdata_Analytics_DataQuery
 	 */
-	public function setSegment($segment){
+	public function setSegment($segment)
+	{
 		$this->setParam('segment', $segment);
 		return $this;
 	}
@@ -367,11 +387,11 @@ class Zend_Gdata_Analytics_DataQuery extends Zend_Gdata_Query {
 		
 		// filtering
 		$filters = "";
-		foreach($this->_filters as $filter){
+		foreach ($this->_filters as $filter) {
 			$filters.=($filter[1]===true?';':',').$filter[0];
 		}
 		
-		if($filters!=""){
+		if ($filters!="") {
 			$this->setParam('filters', ltrim($filters, ",;"));
 		}
 		
@@ -379,4 +399,3 @@ class Zend_Gdata_Analytics_DataQuery extends Zend_Gdata_Query {
         return $uri;
     }
 }
-?>

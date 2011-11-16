@@ -1,20 +1,49 @@
 <?php
-
+/**
+ * @see Zend_Gdata
+ */
 require_once 'Zend/Gdata.php';
-require_once 'Zend/Gdata/Analytics/AccountFeed.php';
+
+/**
+ * @see Zend_Gdata_Analytics_AccountEntry
+ */
 require_once 'Zend/Gdata/Analytics/AccountEntry.php';
-require_once 'Zend/Gdata/Analytics/DataFeed.php';
+
+/**
+ * @see Zend_Gdata_Analytics_AccountFeed
+ */
+require_once 'Zend/Gdata/Analytics/AccountFeed.php';
+
+/**
+ * @see Zend_Gdata_Analytics_DataEntry
+ */
 require_once 'Zend/Gdata/Analytics/DataEntry.php';
+
+/**
+ * @see Zend_Gdata_Analytics_DataFeed
+ */
+require_once 'Zend/Gdata/Analytics/DataFeed.php';
+
+/**
+ * @see Zend_Gdata_Analytics_DataQuery
+ */
 require_once 'Zend/Gdata/Analytics/DataQuery.php';
 
-class Zend_Gdata_Analytics extends Zend_Gdata {
+/**
+ * @category   Zend
+ * @package    Zend_Gdata
+ * @subpackage Analytics
+ */
+class Zend_Gdata_Analytics extends Zend_Gdata
+{
 
 	const AUTH_SERVICE_NAME = 'analytics';
 	const ANALYTICS_FEED_URI = 'http://www.google.com/analytics/feeds';
 	const ANALYTICS_ACCOUNT_FEED_URI = 'http://www.google.com/analytics/feeds/accounts';
 
 	public static $namespaces = array(
-        array('ga', 'http://schemas.google.com/analytics/2009', 1, 0));
+        array('ga', 'http://schemas.google.com/analytics/2009', 1, 0)
+    );
 
     /**
      * Create Zend_Gdata_Analytics object
@@ -48,10 +77,11 @@ class Zend_Gdata_Analytics extends Zend_Gdata {
      * @param mixed $location
      * @return Zend_Gdata_Analytics_DataFeed
      */
-    public function getDataFeed($location){
+    public function getDataFeed($location)
+    {
 		if ($location == null) {
             $uri = self::ANALYTICS_FEED_URI;
-        } else if ($location instanceof Zend_Gdata_Query) {
+        } elseif ($location instanceof Zend_Gdata_Query) {
             $uri = $location->getQueryUrl();
         } else {
             $uri = $location;
@@ -64,8 +94,8 @@ class Zend_Gdata_Analytics extends Zend_Gdata {
      * 
      * @return Zend_Gdata_Analytics_DataQuery
      */
-    public function newDataQuery($profileId=null){
+    public function newDataQuery($profileId=null)
+    {
     	return new Zend_Gdata_Analytics_DataQuery($profileId);
     }
 }
-?>

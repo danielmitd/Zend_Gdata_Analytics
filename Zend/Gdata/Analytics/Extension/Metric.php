@@ -10,7 +10,8 @@ require_once 'Zend/Gdata/Analytics/Extension/Property.php';
  * @package    Zend_Gdata
  * @subpackage Analytics
  */
-class Zend_Gdata_Analytics_Extension_Metric extends Zend_Gdata_Analytics_Extension_Property
+class Zend_Gdata_Analytics_Extension_Metric 
+    extends Zend_Gdata_Analytics_Extension_Property
 {
     protected $_rootNamespace = 'ga';
     protected $_rootElement = 'metric';
@@ -31,4 +32,3 @@ class Zend_Gdata_Analytics_Extension_Metric extends Zend_Gdata_Analytics_Extensi
         }
     }
 }
-?>

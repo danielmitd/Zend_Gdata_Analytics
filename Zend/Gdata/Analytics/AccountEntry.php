@@ -4,24 +4,33 @@
  */
 require_once 'Zend/Gdata/Entry.php';
 
-require_once 'Zend/Gdata/Analytics/Extension/Property.php';
-require_once 'Zend/Gdata/Analytics/Extension/Metric.php';
+/**
+ * @see Zend_Gdata_Analytics_Extension_Dimension
+ */
 require_once 'Zend/Gdata/Analytics/Extension/Dimension.php';
+
+/**
+ * @see Zend_Gdata_Analytics_Extension_Metric
+ */
+require_once 'Zend/Gdata/Analytics/Extension/Metric.php';
+
+/**
+ * @see Zend_Gdata_Analytics_Extension_Property
+ */
+require_once 'Zend/Gdata/Analytics/Extension/Property.php';
+
+/**
+ * @see Zend_Gdata_Analytics_Extension_TableId
+ */
 require_once 'Zend/Gdata/Analytics/Extension/TableId.php';
 
 /**
- * Represents a Calendar entry in the Calendar data API meta feed of a user's
- * calendars.
- *
  * @category   Zend
  * @package    Zend_Gdata
- * @subpackage Calendar
- * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @subpackage Analytics
  */
 class Zend_Gdata_Analytics_AccountEntry extends Zend_Gdata_Entry
 {
-
 	protected $_accountId;
 	protected $_accountName;
 	protected $_profileId;
@@ -30,6 +39,9 @@ class Zend_Gdata_Analytics_AccountEntry extends Zend_Gdata_Entry
 	protected $_timezone;
 	protected $_tableId;
 
+	/**
+	 * @see Zend_Gdata_Entry::__construct()
+	 */
 	public function __construct($element = null)
     {
         $this->registerAllNamespaces(Zend_Gdata_Analytics::$namespaces);
@@ -38,6 +50,7 @@ class Zend_Gdata_Analytics_AccountEntry extends Zend_Gdata_Entry
 
     /**
      * @param DOMElement $child
+     * @return void
      */
     protected function takeChildFromDOM($child)
     {
@@ -59,4 +72,3 @@ class Zend_Gdata_Analytics_AccountEntry extends Zend_Gdata_Entry
         }
     }
 }
-?>

@@ -6,13 +6,9 @@
 require_once 'Zend/Gdata/Feed.php';
 
 /**
- * Represents the meta-feed list of calendars
- *
  * @category   Zend
  * @package    Zend_Gdata
- * @subpackage Calendar
- * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @subpackage Analytics
  */
 class Zend_Gdata_Analytics_AccountFeed extends Zend_Gdata_Feed
 {
@@ -30,10 +26,12 @@ class Zend_Gdata_Analytics_AccountFeed extends Zend_Gdata_Feed
      */
     protected $_feedClassName = 'Zend_Gdata_Analytics_AccountFeed';
 
+    /**
+     * @see Zend_GData_Feed::__construct()
+     */
     public function __construct($element = null)
     {
         $this->registerAllNamespaces(Zend_Gdata_Analytics::$namespaces);
         parent::__construct($element);
     }
 }
-?>

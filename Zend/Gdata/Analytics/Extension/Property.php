@@ -12,7 +12,6 @@ require_once 'Zend/Gdata/Extension.php';
  */
 class Zend_Gdata_Analytics_Extension_Property extends Zend_Gdata_Extension
 {
-
     protected $_rootNamespace = 'ga';
     protected $_rootElement = 'property';
     protected $_value = null;
@@ -40,14 +39,14 @@ class Zend_Gdata_Analytics_Extension_Property extends Zend_Gdata_Extension
     protected function takeAttributeFromDOM($attribute)
     {
         switch ($attribute->localName) {
-        case 'name':
-        	$this->_name = substr($attribute->nodeValue, 3);
-	        break;
-        case 'value':
-            $this->_value = $attribute->nodeValue;
-            break;
-        default:
-            parent::takeAttributeFromDOM($attribute);
+            case 'name':
+            	$this->_name = substr($attribute->nodeValue, 3);
+    	        break;
+            case 'value':
+                $this->_value = $attribute->nodeValue;
+                break;
+            default:
+                parent::takeAttributeFromDOM($attribute);
         }
     }
 
@@ -98,4 +97,3 @@ class Zend_Gdata_Analytics_Extension_Property extends Zend_Gdata_Extension
         return $this->getValue();
     }
 }
-?>

@@ -15,13 +15,9 @@ require_once 'Zend/Gdata/Analytics.php';
 require_once 'Zend/Gdata/Analytics/DataEntry.php';
 
 /**
- * Feed for Gdata Geographic data entries.
- *
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Analytics
- * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Gdata_Analytics_DataFeed extends Zend_Gdata_Feed
 {
@@ -45,4 +41,3 @@ class Zend_Gdata_Analytics_DataFeed extends Zend_Gdata_Feed
         parent::__construct($element);
     }
 }
-?>
