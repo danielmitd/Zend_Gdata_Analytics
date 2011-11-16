@@ -25,8 +25,8 @@ class Zend_Gdata_Analytics extends Zend_Gdata {
      */
 	public function __construct($client = null, $applicationId = 'MyCompany-MyApp-1.0')
     {
-        $this->registerPackage('Zend_Gdata_Analyitcs');
-        $this->registerPackage('Zend_Gdata_Analyitcs_Extension');
+        $this->registerPackage('Zend_Gdata_Analytics');
+        $this->registerPackage('Zend_Gdata_Analytics_Extension');
         parent::__construct($client, $applicationId);
         $this->_httpClient->setParameterPost('service', self::AUTH_SERVICE_NAME);
     }
