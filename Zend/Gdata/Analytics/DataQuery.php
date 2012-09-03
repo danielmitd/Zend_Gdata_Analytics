@@ -12,7 +12,7 @@ require_once 'Zend/Gdata/Query.php';
  */
 class Zend_Gdata_Analytics_DataQuery extends Zend_Gdata_Query {
 
-	const ANALYTICS_FEED_URI = 'http://www.google.com/analytics/feeds/data';
+	const ANALYTICS_FEED_URI = 'https://www.google.com/analytics/feeds/data';
 
 	/**
      * The default URI used for feeds.
