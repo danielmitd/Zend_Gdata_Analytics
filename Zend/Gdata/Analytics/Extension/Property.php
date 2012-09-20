@@ -1,4 +1,24 @@
 <?php
+/**
+ * Zend Framework
+ *
+ * LICENSE
+ *
+ * This source file is subject to the new BSD license that is bundled
+ * with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://framework.zend.com/license/new-bsd
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@zend.com so we can send you a copy immediately.
+ *
+ * @category   Zend
+ * @package    Zend_Gdata
+ * @subpackage Analytics
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @version    $Id$
+ */
 
 /**
  * @see Zend_Gdata_Extension
@@ -40,8 +60,9 @@ class Zend_Gdata_Analytics_Extension_Property extends Zend_Gdata_Extension
     {
         switch ($attribute->localName) {
             case 'name':
-            	$this->_name = substr($attribute->nodeValue, 3);
-    	        break;
+                $name = explode(':', $attribute->nodeValue);
+                $this->_name = end($name);
+                break;
             case 'value':
                 $this->_value = $attribute->nodeValue;
                 break;
@@ -76,16 +97,18 @@ class Zend_Gdata_Analytics_Extension_Property extends Zend_Gdata_Extension
      * @param string $name
      * @return Zend_Gdata_Analytics_Extension_Property
      */
-    public function setName($name){
-    	$this->_name = $name;
-    	return $this;
+    public function setName($name)
+    {
+        $this->_name = $name;
+        return $this;
     }
 
     /**
      * @return string
      */
-    public function getName(){
-    	return $this->_name;
+    public function getName()
+    {
+        return $this->_name;
     }
 
     /**

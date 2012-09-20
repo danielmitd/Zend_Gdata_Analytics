@@ -21,20 +21,32 @@
  */
 
 /**
- * @see Zend_Gdata_Extension_Metric
+ * @see Zend_Gdata_Extension
  */
-require_once 'Zend/Gdata/Analytics/Extension/Metric.php';
+require_once 'Zend/Gdata/Extension.php';
 
 /**
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Analytics
  */
-class Zend_Gdata_Analytics_Extension_Dimension 
-    extends Zend_Gdata_Analytics_Extension_Metric
+class Zend_Gdata_Analytics_Goal extends Zend_Gdata_Extension
 {
     protected $_rootNamespace = 'ga';
-    protected $_rootElement = 'dimension';
-    protected $_value = null;
-    protected $_name = null;
+    protected $_rootElement = 'goal';
+
+    public function __construct()
+    {
+        $this->registerAllNamespaces(Zend_Gdata_Analytics::$namespaces);
+        parent::__construct();
+    }
+    
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        $attribs = $this->getExtensionAttributes();
+        return $attribs['name']['value'];
+    }
 }

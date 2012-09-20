@@ -22,4 +22,4 @@ An additonal Zend_GData component to query data from Analytics.
       /** … **/
     }
     
-More on the [blog](http://healthycod.in/2011/07/google-analytics-and-zend-framework).
+More on the [blog](http://healthycod.in/2011/07/google-analytics-and-zend-framework). Also take a look in the [ZF1-Framework](http://framework.zend.com/svn/framework/standard/trunk/library/Zend/Gdata/Analytics/).

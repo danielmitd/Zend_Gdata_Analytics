@@ -1,5 +1,26 @@
 <?php
 /**
+ * Zend Framework
+ *
+ * LICENSE
+ *
+ * This source file is subject to the new BSD license that is bundled
+ * with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://framework.zend.com/license/new-bsd
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@zend.com so we can send you a copy immediately.
+ *
+ * @category   Zend
+ * @package    Zend_Gdata
+ * @subpackage Analytics
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @version    $Id$
+ */
+
+/**
  * @see Zend_Gdata
  */
 require_once 'Zend/Gdata.php';
@@ -30,6 +51,11 @@ require_once 'Zend/Gdata/Analytics/DataFeed.php';
 require_once 'Zend/Gdata/Analytics/DataQuery.php';
 
 /**
+ * @see Zend_Gdata_Analytics_AccountQuery
+ */
+require_once 'Zend/Gdata/Analytics/AccountQuery.php';
+
+/**
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Analytics
@@ -37,22 +63,23 @@ require_once 'Zend/Gdata/Analytics/DataQuery.php';
 class Zend_Gdata_Analytics extends Zend_Gdata
 {
 
-	const AUTH_SERVICE_NAME = 'analytics';
-	const ANALYTICS_FEED_URI = 'https://www.google.com/analytics/feeds';
-	const ANALYTICS_ACCOUNT_FEED_URI = 'https://www.google.com/analytics/feeds/accounts';
+    const AUTH_SERVICE_NAME = 'analytics';
+    const ANALYTICS_FEED_URI = 'https://www.googleapis.com/analytics/v2.4/data';
+    const ANALYTICS_ACCOUNT_FEED_URI = 'https://www.googleapis.com/analytics/v2.4/management/accounts';
 
-	public static $namespaces = array(
-        array('ga', 'http://schemas.google.com/analytics/2009', 1, 0)
-    );
+    public static $namespaces = array(
+        array('analytics', 'http://schemas.google.com/analytics/2009', 1, 0),
+        array('ga', 'http://schemas.google.com/ga/2009', 1, 0)
+     );
 
     /**
-     * Create Zend_Gdata_Analytics object
+     * Create Gdata object
      *
-     * @param Zend_Http_Client $client (optional) The HTTP client to use when
-     *          when communicating with the Google Apps servers.
-     * @param string $applicationId The identity of the app in the form of Company-AppName-Version
+     * @param Zend_Http_Client $client
+     * @param string $applicationId The identity of the app in the form of
+     *          Company-AppName-Version
      */
-	public function __construct($client = null, $applicationId = 'MyCompany-MyApp-1.0')
+    public function __construct($client = null, $applicationId = 'MyCompany-MyApp-1.0')
     {
         $this->registerPackage('Zend_Gdata_Analytics');
         $this->registerPackage('Zend_Gdata_Analytics_Extension');
@@ -62,29 +89,28 @@ class Zend_Gdata_Analytics extends Zend_Gdata
 
     /**
      * Retrieve account feed object
-     *
+     * 
+     * @param string|Zend_Uri_Uri $uri
      * @return Zend_Gdata_Analytics_AccountFeed
      */
-    public function getAccountFeed()
+    public function getAccountFeed($uri = self::ANALYTICS_ACCOUNT_FEED_URI)
     {
-        $uri = self::ANALYTICS_ACCOUNT_FEED_URI . '/default?prettyprint=true';
+        if ($uri instanceof Query) {
+            $uri = $uri->getQueryUrl();
+        }
         return parent::getFeed($uri, 'Zend_Gdata_Analytics_AccountFeed');
     }
 
     /**
      * Retrieve data feed object
      * 
-     * @param mixed $location
+     * @param string|Zend_Uri_Uri $uri
      * @return Zend_Gdata_Analytics_DataFeed
      */
-    public function getDataFeed($location)
+    public function getDataFeed($uri = self::ANALYTICS_FEED_URI)
     {
-		if ($location == null) {
-            $uri = self::ANALYTICS_FEED_URI;
-        } elseif ($location instanceof Zend_Gdata_Query) {
-            $uri = $location->getQueryUrl();
-        } else {
-            $uri = $location;
+        if ($uri instanceof Query) {
+            $uri = $uri->getQueryUrl();
         }
         return parent::getFeed($uri, 'Zend_Gdata_Analytics_DataFeed');
     }
@@ -94,8 +120,18 @@ class Zend_Gdata_Analytics extends Zend_Gdata
      * 
      * @return Zend_Gdata_Analytics_DataQuery
      */
-    public function newDataQuery($profileId=null)
+    public function newDataQuery()
     {
-    	return new Zend_Gdata_Analytics_DataQuery($profileId);
+        return new Zend_Gdata_Analytics_DataQuery();
+    }
+    
+    /**
+     * Returns a new AccountQuery object.
+     *
+     * @return Zend_Gdata_Analytics_AccountQuery
+     */
+    public function newAccountQuery()
+    {
+        return new Zend_Gdata_Analytics_AccountQuery();
     }
 }
