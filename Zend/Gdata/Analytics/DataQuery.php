@@ -140,6 +140,9 @@ class Zend_Gdata_Analytics_DataQuery extends Zend_Gdata_Query
     const METRIC_VISITORS = 'ga:visitors';
     const METRIC_VISITS = 'ga:visits';
 
+    // Page Tracking
+    const METRIC_PAGEVIEWS_PER_VISIT = 'ga:pageviewsPerVisit';
+
     // M2. Campaign
     const METRIC_AD_CLICKS = 'ga:adClicks';
     const METRIC_AD_COST = 'ga:adCost';
@@ -181,7 +184,28 @@ class Zend_Gdata_Analytics_DataQuery extends Zend_Gdata_Query
     const METRIC_TOTAL_EVENTS = 'ga:totalEvents';
     const METRIC_UNIQUE_EVENTS = 'ga:uniqueEvents';
     const METRIC_EVENT_VALUE = 'ga:eventValue';
-    
+
+    // Site Speed
+    const METRIC_PAGE_LOAD_TIME = 'ga:pageLoadTime';
+    const METRIC_PAGE_LOAD_SAMPLE = 'ga:pageLoadSample';
+    const METRIC_AVG_PAGE_LOAD_TIME = 'ga:avgPageLoadTime';
+    const METRIC_DOMAIN_LOOKUP_TIME = 'ga:domainLookupTime';
+    const METRIC_AVG_DOMAIN_LOOKUP_TIME = 'ga:avgDomainLookupTime';
+    const METRIC_PAGE_DOWNLOAD_TIME = 'ga:pageDownloadTime';
+    const METRIC_AVG_PAGE_DOWNLOAD_TIME = 'ga:avgPageDownloadTime';
+    const METRIC_REDIRECTION_TIME = 'ga:redirectionTime';
+    const METRIC_AVG_REDIRECTION_TIME = 'ga:avgRedirectionTime';
+    const METRIC_SERVER_CONNECTION_TIME = 'ga:serverConnectionTime';
+    const METRIC_AVG_SERVER_CONNECTION_TIME = 'ga:avgServerConnectionTime';
+    const METRIC_SERVER_RESPONSE_TIME = 'ga:serverResponseTime';
+    const METRIC_AVG_SERVER_RESPONSE_TIME = 'ga:avgServerResponseTime';
+    const METRIC_SPEED_METRICS_SAMPLE = 'ga:speedMetricsSample';
+    const METRIC_DOM_INTERACTIVE_TIME = 'ga:domInteractiveTime';
+    const METRIC_AVG_DOM_INTERACTIVE_TIME = 'ga:avgDomInteractiveTime';
+    const METRIC_DOM_CONTENT_LOADED_TIME = 'ga:domContentLoadedTime';
+    const METRIC_AVG_DOMCONTENT_LOADED_TIME = 'ga:avgDomContentLoadedTime';
+    const METRIC_DOM_LATENCY_METRICS_SAMPLE = 'ga:domLatencyMetricsSample';
+
     // suported filter operators
     const EQUALS = "==";
     const EQUALS_NOT = "!=";
@@ -193,7 +217,7 @@ class Zend_Gdata_Analytics_DataQuery extends Zend_Gdata_Query
     const CONTAINS_NOT ="!@";
     const REGULAR ="=~";
     const REGULAR_NOT ="!~";
-    
+
     /**
      * @var string
      */
@@ -214,7 +238,7 @@ class Zend_Gdata_Analytics_DataQuery extends Zend_Gdata_Query
      * @var array
      */
     protected $_filters = array();
-    
+
     /**
      * @param string $id
      * @return Zend_Gdata_Analytics_DataQuery
@@ -239,7 +263,7 @@ class Zend_Gdata_Analytics_DataQuery extends Zend_Gdata_Query
      */
     public function addDimension($dimension)
     {
-        $this->_dimensions[$dimension] = true;        
+        $this->_dimensions[$dimension] = true;
         return $this;
     }
 
@@ -305,7 +329,7 @@ class Zend_Gdata_Analytics_DataQuery extends Zend_Gdata_Query
         $this->setParam("end-date", $date);
         return $this;
     }
-    
+
     /**
      * @param string $filter
      * @return Zend_Gdata_Analytics_DataQuery
@@ -315,7 +339,7 @@ class Zend_Gdata_Analytics_DataQuery extends Zend_Gdata_Query
         $this->_filters[] = array($filter, true);
         return $this;
     }
-    
+
     /**
      * @param string $filter
      * @return Zend_Gdata_Analytics_DataQuery
@@ -325,7 +349,7 @@ class Zend_Gdata_Analytics_DataQuery extends Zend_Gdata_Query
         $this->_filters[] = array($filter, false);
         return $this;
     }
-    
+
     /**
      * @param string $sort
      * @param boolean[optional] $descending
@@ -337,7 +361,7 @@ class Zend_Gdata_Analytics_DataQuery extends Zend_Gdata_Query
         $this->_sort[] = ($descending?'-':'').$sort;
         return $this;
     }
-    
+
     /**
      * @return Zend_Gdata_Analytics_DataQuery
      */
@@ -346,7 +370,7 @@ class Zend_Gdata_Analytics_DataQuery extends Zend_Gdata_Query
         $this->_sort = array();
         return $this;
     }
-    
+
     /**
      * @param string $segment
      * @return Zend_Gdata_Analytics_DataQuery
@@ -366,37 +390,37 @@ class Zend_Gdata_Analytics_DataQuery extends Zend_Gdata_Query
         if (isset($this->_url)) {
             $uri = $this->_url;
         }
-        
+
         $dimensions = $this->getDimensions();
         if (!empty($dimensions)) {
             $this->setParam('dimensions', implode(",", array_keys($dimensions)));
         }
-        
+
         $metrics = $this->getMetrics();
         if (!empty($metrics)) {
             $this->setParam('metrics', implode(",", array_keys($metrics)));
         }
-        
+
         // profile id (ga:tableId)
         if ($this->getProfileId() != null) {
             $this->setParam('ids', 'ga:'.ltrim($this->getProfileId(), "ga:"));
         }
-                
+
         // sorting
         if ($this->_sort) {
             $this->setParam('sort', implode(",", $this->_sort));
         }
-        
+
         // filtering
         $filters = "";
         foreach ($this->_filters as $filter) {
             $filters.=($filter[1]===true?';':',').$filter[0];
         }
-        
+
         if ($filters!="") {
             $this->setParam('filters', ltrim($filters, ",;"));
         }
-        
+
         $uri .= $this->getQueryString();
         return $uri;
     }
