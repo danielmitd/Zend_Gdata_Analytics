@@ -131,6 +131,8 @@ class Zend_Gdata_Analytics_DataQuery extends Zend_Gdata_Query
 
     // M1. Visitor
     const METRIC_BOUNCES = 'ga:bounces';
+    const METRIC_VISIT_BOUNCE_RATE = 'ga:visitBounceRate';
+    const METRIC_ENTRANCE_BOUNCE_RATE = 'ga:entranceBounceRate';
     const METRIC_ENTRANCES = 'ga:entrances';
     const METRIC_EXITS = 'ga:exits';
     const METRIC_NEW_VISITS = 'ga:newVisits';
